@@ -38,11 +38,6 @@ def main():
             sleep(1)
 
 
-#myBotInfo = bot.getMe()
-#try:
- #   print (myBotInfo)
-#except:
- #   print ("Bot is not connected. Please check your token.")
 def echo(bot, update_id):
 
     # Request updates after the last update_id
