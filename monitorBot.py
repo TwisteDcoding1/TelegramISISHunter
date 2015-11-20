@@ -1,5 +1,5 @@
 #Author:L337H4X0R
-#Purpose: Enter ISIS Telegram Chats, Pull usernames and report for abuse.
+#Purpose: Enter ISIS Telegram Chats, Pull usernames and send to C&C System.
 #Installation Instructions
 #1. Install python-telegram-bot by "pip install python-telegram-bot"
 #2. Obtain your token from https://core.telegram.org/bots#botfather (set your bot name conspicuous)
@@ -8,10 +8,11 @@
 #5. Run the bot.
 #6. Invite the bot into the chat you want to monitor.
 #7. Profit??
-
 #Check to see if user has installed python-telegram-bot library.
 import telegram
+
 from time import sleep
+import urllib.request
 try:
     from urllib.error import URLError
 except ImportError:
@@ -50,11 +51,16 @@ def echo(bot, update_id):
         jihadiText = update.message.text
 
         if jihadiText:
-            # Reply to the message
-            bot.sendMessage(chat_id=chat_id,text=jihadiText)
             logFile = open("WatchList.txt", "a")
-            logFile.write("Username:" + jihadiUsername + " ID:" + str(jihadiID) + " Message:" +jihadiText + "\n")
+            logFile.write("Username:" + jihadiUsername + " ID:" + str(jihadiID) + " Message:" + jihadiText + "\n")
             logFile.close()
+            url = ('http://URLHERE/api.php')
+            data = urllib.parse.urlencode({'user' : jihadiUsername,
+                                     'id'  : jihadiID,
+                                     'msg' : jihadiText})
+            binary_data = data.encode('ascii')
+            content = urllib.request.urlopen(url,binary_data)
+            print("Username:" + jihadiUsername + " ID:" + str(jihadiID) + " Message:" + str(jihadiText) + "\n")
     return update_id
 
 if __name__ == '__main__':
