@@ -1,5 +1,4 @@
 #Author:L337H4X0R
-#Purpose: Enter ISIS Telegram Chats, Pull usernames and send to C&C System.
 #Installation Instructions
 #1. Install python-telegram-bot by "pip install python-telegram-bot"
 #2. Obtain your token from https://core.telegram.org/bots#botfather (set your bot name conspicuous)
